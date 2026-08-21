@@ -2,6 +2,6 @@
 model_type: "random_forest"
 
 # Sieu tham so cho mo hinh
-n_estimators: 350
-max_depth: 20
+n_estimators: 10
+max_depth: 2
 min_samples_split: 2
