@@ -1,5 +1,7 @@
-# Sieu tham so cho mo hinh RandomForestClassifier
-# Thay doi cac gia tri nay giua cac lan chay de thi nghiem (Buoc 1)
+# Model Type: 'random_forest', 'gradient_boosting', hoặc 'logistic_regression'
+model_type: "random_forest"
+
+# Sieu tham so cho mo hinh
 n_estimators: 350
 max_depth: 20
 min_samples_split: 2
