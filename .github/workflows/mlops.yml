@@ -4,10 +4,13 @@ on:
   push:
     branches: [main]
     paths:
-      - 'data/**.dvc'
-      - 'src/**.py'
+      - 'data/**'
+      - 'src/**'
       - 'params.yaml'
+      - 'tests/**'
+      - '.github/workflows/**'
   workflow_dispatch:
+
 
 jobs:
 
@@ -58,12 +61,12 @@ jobs:
 
       - name: Authenticate to Cloud Storage
         run: |
-          echo '${{ secrets.CLOUD_CREDENTIALS }}' > sa-key.json
           echo '${{ secrets.CLOUD_CREDENTIALS }}' > /tmp/sa-key.json
+          echo '${{ secrets.CLOUD_CREDENTIALS }}' > sa-key.json
           echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa-key.json" >> $GITHUB_ENV
 
       - name: Pull data with DVC
-        run: dvc pull data/train_phase1.csv.dvc data/eval.csv.dvc
+        run: dvc pull data/train_phase1.csv data/eval.csv
 
       - name: Train model
         run: python src/train.py
@@ -76,13 +79,14 @@ jobs:
 
       - name: Upload model to Cloud Storage
         env:
-          CLOUD_BUCKET: ${{ secrets.CLOUD_BUCKET }}
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/sa-key.json
+          BUCKET_NAME: ${{ secrets.CLOUD_BUCKET }}
         run: |
           python - <<'EOF'
           import os
           from google.cloud import storage
 
-          bucket_name = os.environ["CLOUD_BUCKET"]
+          bucket_name = os.environ["BUCKET_NAME"]
           client = storage.Client()
           bucket = client.bucket(bucket_name)
           blob = bucket.blob("models/latest/model.pkl")
