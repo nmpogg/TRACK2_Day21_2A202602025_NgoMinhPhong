@@ -5,3 +5,4 @@ model_type: "random_forest"
 n_estimators: 350
 max_depth: 20
 min_samples_split: 2
+

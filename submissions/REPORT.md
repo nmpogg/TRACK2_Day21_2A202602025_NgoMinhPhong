@@ -78,8 +78,11 @@ Trong quá trình xây dựng pipeline CI/CD tự động, một số sự cố 
 
 ## 5. Danh Sách Minh Chứng (Screenshots)
 
-Các hình ảnh minh chứng được lưu trong thư mục `submissions/screenshots/`:
-1. `mlflowUI.png`: Giao diện MLflow UI ghi nhận các lượt chạy thực nghiệm cục bộ.
-2. `github_action1.png`: GitHub Actions pipeline Bước 2 hoàn thành cả 4 jobs màu xanh (`Test`, `Train`, `Eval`, `Deploy`).
-3. `github_action2.png`: GitHub Actions pipeline Bước 3 tự động kích hoạt bởi commit dữ liệu DVC.
-4. `health_predict.png`: Kết quả gọi API thực tế tới endpoint `/health` và `/predict` trên Cloud VM.
+Tất cả các hình ảnh minh chứng được lưu trong thư mục `submissions/screenshots/`:
+1. **`mlflowUI.png`**: Giao diện MLflow UI ghi nhận đầy đủ các lượt chạy thực nghiệm cục bộ với các siêu tham số khác nhau (Bước 1).
+2. **`github_action1.png`**: Pipeline CI/CD tự động ở Bước 2 hoàn thành thành công cả 4 jobs màu xanh (`Unit Test` $\rightarrow$ `Train` $\rightarrow$ `Eval` $\rightarrow$ `Deploy`).
+3. **`github_action2.png`**: Pipeline Continuous Training ở Bước 3 tự động được kích hoạt khi có commit dữ liệu DVC mới (`train_phase2`).
+4. **`accuracy_fail.png`**: Minh chứng Eval Gate hoạt động chính xác: tự động chặn và hủy deploy khi độ chính xác mô hình không đạt yêu cầu.
+5. **`health_predict.png`**: Minh chứng gọi thực tế thành công tới VM qua REST API: endpoint `/health` (`{"status":"ok"}`) và `/predict` (`{"prediction":0,"label":"thap"}`).
+6. **`gcs_bucket.png`**: Giao diện Google Cloud Storage Console hiển thị đầy đủ thư mục dữ liệu `dvc/` và model `models/latest/model.pkl` đã upload lên bucket `mlops-lab-nmp-202602025`.
+7. **`dagshub.png`**: Giao diện MLflow Remote Server trên DagsHub lưu trữ và theo dõi các thí nghiệm trên đám mây từ xa (Bonus 1).
